@@ -3,17 +3,17 @@
 
 This project contains wrapping libraries for pchat addins.
 
-##Tools
+## Tools
 
 To build this package you need the following tools installed:
 
 1. Yarn or NPM
 
-##Building
+## Building
 
 To build the modern library, simply run "yarn build" in the root folder of the project after installing the dependencies locally (`yarn install`/`npm install`). The built artifacts will be in the .\dist\ folder.
 
-##Testing
+## Testing
 
 To test the wrapper, you have to:
 
@@ -40,4 +40,4 @@ To test add-in functionality, you have to:
 
 ## Source
 
-To use the source typescript, you should point to "@mindlink/add-in-client/client"
+To use the source typescript, you should reference `"@mindlink/add-in-client/client"`
