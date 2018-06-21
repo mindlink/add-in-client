@@ -1,0 +1,119 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+ <head>
+  <title>WebChat Client-AddIn Tester</title>
+     <!-- Include the addin wrapper -->
+	 <script type="text/javascript" src="./dist/AddInWrapper.js"></script>
+ </head>
+
+ <body>
+	<!-- buttons to invoke js methods on the window.addins object -->
+
+	<!-- sends a message -->
+	<button onclick="javascript:SendMessage('testmessage', false)">Send Message</button> 
+	<!-- sends an alert message -->
+	<button onclick="javascript:SendMessage('testmessage', true)">Send Alert Message</button>
+	<br/>
+
+	<!-- Prints the chat room details -->
+	<button onclick="javascript:GetChatRoomDetails()">Get Chat Room Details</button>
+	<br/>
+
+	<!-- Prints the local user's details -->
+	<button onclick="javascript:GetLocalUserDetails()">Get Local User Details</button>
+	<br/>
+
+	<!-- Prints the domain's details -->
+	<button onclick="javascript:GetDomainDetails()">Get Domain Details</button>
+	<br/>
+
+	<!-- Prints the maximum message length -->
+	<button onclick="javascript:GetMaxMessageLength()">Get Max Message Length</button>
+	<br/>
+
+	<!-- Methods to handle click events on the test buttons -->
+	<script>
+		// sends a message
+		function SendMessage(message, alert) {
+			window.AddInWrapper.sendMessage(message, alert, function() {
+			    logMessage('Successfully sent message...');
+			}, function() {
+			    logMessage('Failed to send message...');
+			});
+		};
+
+		// gets and prints the chat room details
+		function GetChatRoomDetails() {
+			window.AddInWrapper.getChatRoom(function(details) {
+			    logMessage('Name: ' + details.Name + ', Domain: ' + details.Domain + ', Description: "' + details.Description + '", Topic: "' + details.Topic + '"');
+			}, function() {
+			    logMessage('Failed to fetch chat room details...');
+			});
+		};
+
+		// gets and prints the local user's details
+		function GetLocalUserDetails() {
+		    window.AddInWrapper.getLocalUserDetails(function(details) {
+		        logMessage('Uri: ' + details.Uri + ', DisplayName: "' + details.DisplayName + '"');
+		    }, function() {
+		        logMessage('Failed to fetch local user details...');
+		    });
+		};
+
+		// gets and prints the domain's details
+		function GetDomainDetails() {
+		    window.AddInWrapper.getDomainDetails(function(domainName) {
+		        logMessage('Domain Name: ' + domainName);
+		    }, function() {
+		        logMessage('Failed to fetch domain details...');
+		    });
+		};
+
+		// gets and prints the maximum message length
+		function GetMaxMessageLength() {
+		    window.AddInWrapper.getMaxMessageLength(function(maxMessageLength) {
+		        logMessage('Max message length: ' + maxMessageLength);
+		    }, function() {
+		        logMessage('Failed to fetch maximum message length...');
+		    });
+		};
+	</script>
+
+	<!-- Methods to handle incoming js method invocations from addin host -->
+	<script>
+		// handles received messages
+	    window.AddInWrapper.addMessageReceivedHandler(function(message, uri) {
+			logMessage('RECEIVED: ' + message + ' ' + uri);
+		});
+
+		// handles messages about to be posted
+	    window.AddInWrapper.addBeforeMessageSendHandler(function(message) {
+			// if message contains the phrase "stop" stop the message being sent
+			if (message.indexOf('stop') >= 0) {
+				return true;
+			}
+
+			logMessage('SENT: ' + message);
+
+			// allow the message to be sent
+			return false;
+		});
+
+		// handles notification of the closing and destruction of the addin
+	    window.AddInWrapper.addClosingHandler(function(closing) {
+			alert('Closing');
+	    });
+	</script>
+
+	<!-- Helper methods -->
+	<script>
+		// prints a string to the page body
+		function logMessage(message) {
+			document.body.appendChild(document.createTextNode(message));
+			document.body.appendChild(document.createElement('br'));
+		};
+		
+		logMessage('Using proxy: ' + window.AddInWrapper);
+	</script>
+ </body>
+</html>

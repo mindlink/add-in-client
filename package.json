@@ -1,0 +1,38 @@
+{
+  "name": "@mindlink/add-in-client",
+  "version": "1.0.0",
+  "description": "An abstraction over the Microsoft Skype for Business add-in client API that supports both native Skype for Business clients and MindLink web and mobile clients for a richer add-in experience.",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mindlink/add-in-client.git"
+  },
+  "keywords": [
+    "mindlink",
+    "addin",
+    "sfb",
+    "SkypeForBusiness",
+    "Lync"
+  ],
+  "author": "mldevelopers@mindlinksoft.com",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/mindlink/add-in-client/issues"
+  },
+  "homepage": "https://github.com/mindlink/add-in-client",
+  "scripts": {
+    "build": "webpack --mode development",
+    "release": "npm run build && npm publish && npm run github-publish",
+    "github-publish": "publish-release --assets dist/add-in-client.js --notes"
+  },
+  "main": "./dist/AddInWrapper.js",
+  "types": "./dist/AddInWrapper.d.ts",
+  "devDependencies": {
+    "ts-loader": "^4.4.1",
+    "typescript": "2.9.1",
+    "webpack": "^4.12.0",
+    "webpack-cli": "^3.0.3"
+  },
+  "dependencies": {
+    "publish-release": "^1.6.0"
+  }
+}

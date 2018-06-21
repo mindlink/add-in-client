@@ -1,0 +1,38 @@
+{
+    "version": "2.9.1",
+    "compilerOptions": {
+          "target": "es6",
+          "module": "es2015",
+          "declaration": true,
+          "forceConsistentCasingInFileNames": true,
+          "noImplicitAny": false,
+          "noUnusedLocals": true,
+          "noUnusedParameters": true,
+          "removeComments": false,
+          "noLib": false,
+          "preserveConstEnums": false,
+          "suppressImplicitAnyIndexErrors": true,
+          "sourceMap": true,
+          "importHelpers": true,
+          "strictNullChecks": true,
+          "strictPropertyInitialization": true,
+          "moduleResolution": "node",
+          "baseUrl": ".",
+          "lib": [
+            "es2015",
+            "dom"
+          ],
+          "typeRoots": [],
+          "types": []
+      },
+      "include": [
+        "./**/*.ts",
+        "./**/*.d.ts"
+      ],
+      "atom": {
+          "rewriteTsconfig": true
+      },
+      "awesomeTypescriptLoaderOptions": {
+        "forceIsolatedModules": true
+    }
+}

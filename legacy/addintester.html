@@ -1,0 +1,101 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
+ <head>
+  <title>WebChat Client-AddIn Tester</title>
+    <!-- include the addin wrapper -->
+	<script type="text/javascript" src="AddInWrapper.js"></script>
+ </head>
+
+ <body>
+	<!-- buttons to invoke js methods on the window.addins object -->
+
+	<!-- sends a message -->
+	<button onclick="javascript:SendMessage('testmessage', false)">Send Message</button> 
+	<!-- sends an alert message -->
+	<button onclick="javascript:SendMessage('testmessage', true)">Send Alert Message</button>
+	<br/>
+
+	<!-- Prints the chat room details -->
+	<button onclick="javascript:GetChatRoomDetails()">Get Chat Room Details</button>
+	<br/>
+
+	<!-- Prints the local user's details -->
+	<button onclick="javascript:GetLocalUserDetails()">Get Local User Details</button>
+	<br/>
+
+	<!-- Prints the domain's details -->
+	<button onclick="javascript:GetDomainDetails()">Get Domain Details</button>
+	<br/>
+
+	<!-- Prints the maximum message length -->
+	<button onclick="javascript:GetMaxMessageLength()">Get Max Message Length</button>
+	<br/>
+
+	<!-- Methods to handle click events on the test buttons -->
+	<script>
+		// sends a message
+		function SendMessage(message, alert) {
+			window.addins.PostMessage(message, alert);
+		};
+
+		// gets and prints the chat room details
+		function GetChatRoomDetails() {
+			var details = window.addins.GetChatRoom();
+			logMessage('Name: ' + details.Name + ', Domain: ' + details.Domain + ', Description: "' + details.Description + '", Topic: "' + details.Topic + '"');
+		};
+
+		// gets and prints the local user's details
+		function GetLocalUserDetails() {
+			var details = window.addins.GetSelfUser();
+			logMessage('Uri: ' + details.Uri + ', DisplayName: "' + details.DisplayName + '"');
+		};
+
+		// gets and prints the domain's details
+		function GetDomainDetails() {
+			var domainName = window.addins.GetDomain();
+			logMessage('Domain Name: ' + domainName);
+		};
+
+		// gets and prints the maximum message length
+		function GetMaxMessageLength() {
+			var maxMessageLength = window.addins.GetMaxMessageLength();
+			logMessage('Max message length: ' + maxMessageLength);
+		};
+	</script>
+
+	<!-- Methods to handle incoming js method invocations from addin host -->
+	<script>
+		// handles received messages
+		function MessageReceived(message, uri) {
+			logMessage('RECEIVED: ' + message + ' ' + uri);
+		};
+
+		// handles messages about to be posted
+		function MessagePosting(message) {
+			// if message contains the phrase "stop" stop the message being sent
+			if (message.indexOf('stop') >= 0) {
+				return true;
+			}
+
+			logMessage('SENT: ' + message);
+
+			// allow the message to be sent
+			return false;
+		};
+
+		// handles notification of the closing and destruction of the addin
+		function Closing(closing) {
+			alert('Closing');
+		};
+	</script>
+
+	<!-- Helper methods -->
+	<script>
+		// prints a string to the page body
+		function logMessage(message) {
+			document.body.appendChild(document.createTextNode(message));
+			document.body.appendChild(document.createElement('br'));
+		};
+	</script>
+ </body>
+</html>

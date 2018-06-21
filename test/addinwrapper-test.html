@@ -1,0 +1,50 @@
+﻿<!DOCTYPE HTML>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>Add-in wrapper V1 Tests</title>
+
+        <link rel="shortcut icon" type="image/png" href="./lib/jasmine-3.1.0/jasmine_favicon.png">
+        <link rel="stylesheet" type="text/css" href="./lib/jasmine-3.1.0/jasmine.css">
+                
+		<script type="text/javascript" src="./lib/jasmine-3.1.0/jasmine.js"></script>
+        <script type="text/javascript" src="./lib/jasmine-3.1.0/jasmine-html.js"></script>
+        <script type="text/javascript" src="./lib/jasmine-3.1.0/boot.js"></script>
+        
+        <script type="text/javascript" src="./../dist/AddinWrapper.js"></script>
+        <script type="text/javascript" src="./AddinWrapperTests.js"></script>
+        
+        <script type="text/javascript">
+            // shim querySelectorAll so HTML reporter runs in GCC
+            (function(d, s) {
+                d = document;
+
+                if (typeof d.querySelectorAll !== 'function') {
+                    s = d.createStyleSheet();
+                    d.querySelectorAll = function(r, c, i, j, a) {
+                        a=d.all, c=[], r = r.replace(/\[for\b/gi, '[htmlFor').split(',');
+                        for (i=r.length; i--;) {
+                            s.addRule(r[i], 'k:v');
+                            for (j=a.length; j--;) a[j].currentStyle.k && c.push(a[j]);
+                            s.removeRule(0);
+                        }
+                        return c;
+                    }
+                }
+            })();
+
+            (function(j$) {
+                j$.Expectation.addCoreMatchers({
+                    toFail: function() {
+                        return {
+                            compare: function(actual, message) { return { pass: false, message: 'Failed: ' + message }; }
+                        };
+                    }
+                });
+            })(window.jasmine);
+        </script>
+    </head>
+    <body>
+
+    </body>
+</html>
