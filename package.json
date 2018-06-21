@@ -21,7 +21,7 @@
   "homepage": "https://github.com/mindlink/add-in-client",
   "scripts": {
     "build": "webpack --mode development",
-    "release": "npm run build && npm publish && npm run github-publish",
+    "release": "npm run build && npm publish --access=public && npm run github-publish",
     "github-publish": "publish-release --assets dist/add-in-client.js --notes"
   },
   "main": "./dist/AddInWrapper.js",
