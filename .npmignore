@@ -1,0 +1,14 @@
+# The Webpack Config
+webpack.config.js
+
+# The Yarn Lockfile
+yarn.lock
+
+# The tests
+test
+
+# The node modules
+node_modules
+
+# The readme
+*.md
