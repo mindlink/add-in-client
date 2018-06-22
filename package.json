@@ -22,10 +22,10 @@
   "scripts": {
     "build": "webpack --mode development",
     "release": "npm run build && npm publish --access=public && npm run github-publish",
-    "github-publish": "publish-release --assets dist/add-in-client.js --notes"
+    "github-publish": "publish-release --assets dist/add-in-client.js"
   },
-  "main": "./dist/AddInWrapper.js",
-  "types": "./dist/AddInWrapper.d.ts",
+  "main": "./dist/add-in-client.js",
+  "types": "./dist/client.d.ts",
   "devDependencies": {
     "ts-loader": "^4.4.1",
     "typescript": "2.9.1",
