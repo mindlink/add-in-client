@@ -1,18 +1,18 @@
 interface IChatRoomInfo {
-    Name: string,
-    Domain: string,
-    Description: string,
-    Topic: string
+    Name: string;
+    Domain: string;
+    Description: string;
+    Topic: string;
 }
 
 interface IUserInfo {
-    Uri: string,
-    DisplayName: string
+    Uri: string;
+    DisplayName: string;
 }
 
 /**
  * Merges the source object into the target object.
- * 
+ *
  * @param {Object} target The object to merge into.
  * @param {Object} source The object to merge.
  * @return The merged target.
@@ -31,7 +31,7 @@ function merge(target: any, source: any): any {
 
 /**
  * Gets a value indicating whether any elements match the given predicate.
- * 
+ *
  * @param {Array} array The array to check for matches.
  * @param {Function} predicate The function predicate performing the comparison.
  * @return {Boolean} "true" if any element in the array matches the predicate, "false" otherwise.
