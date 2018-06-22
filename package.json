@@ -1,6 +1,6 @@
 {
   "name": "@mindlink/add-in-client",
-  "version": "1.0.0",
+  "version": "1.0.1-release.1",
   "description": "An abstraction over the Microsoft Skype for Business add-in client API that supports both native Skype for Business clients and MindLink web and mobile clients for a richer add-in experience.",
   "repository": {
     "type": "git",
