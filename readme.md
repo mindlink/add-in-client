@@ -19,10 +19,10 @@ To test the wrapper, you have to:
 
 1. Serve the folder.
 2. Create an add-in entry onto the relevant pChat infrastructure. For the tests to pass the add-in url needs to be configured with querystrings that provide expectations for the various tests. i.e.
-    1. `dm` for the expected domain name (i.e. `devlync2013.local`).
-    2. `uid` for the expected local user id (i.e. `sip:chow@devlync2013.local`).
-    3. `udm` for the expected  local user display name (i.e. `Wei Cho`).
-    4. `gn` for the expected  name of the group that the addin is hosted into (i.e. `Chengdu`).
+    1. `dm` for the expected domain name.
+    2. `uid` for the expected local user id.
+    3. `udm` for the expected  local user display name.
+    4. `gn` for the expected  name of the group that the addin is hosted into.
     5. `d` for the expected description of the group that the addin is hosted into.
     6. `t` for the expected topic of the group that the addin is hosted into.
     7. `mml` for the expected maximum message length.
