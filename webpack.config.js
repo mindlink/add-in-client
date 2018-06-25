@@ -3,7 +3,7 @@
 const path = require("path");
 
 module.exports = {
-    entry: "./client.ts",
+    entry: "./src/client.ts",
     output: {
         filename: "add-in-client.js",
         path: path.resolve(__dirname, "dist"),

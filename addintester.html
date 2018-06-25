@@ -3,7 +3,7 @@
  <head>
   <title>WebChat Client-AddIn Tester</title>
      <!-- Include the addin wrapper -->
-	 <script type="text/javascript" src="./dist/AddInWrapper.js"></script>
+	 <script type="text/javascript" src="./dist/add-in-client.js"></script>
  </head>
 
  <body>
@@ -35,7 +35,7 @@
 	<script>
 		// sends a message
 		function SendMessage(message, alert) {
-			window.AddInWrapper.sendMessage(message, alert, function() {
+			window.MindLinkAddInClient.sendMessage(message, alert, function() {
 			    logMessage('Successfully sent message...');
 			}, function() {
 			    logMessage('Failed to send message...');
@@ -44,7 +44,7 @@
 
 		// gets and prints the chat room details
 		function GetChatRoomDetails() {
-			window.AddInWrapper.getChatRoom(function(details) {
+			window.MindLinkAddInClient.getChatRoom(function(details) {
 			    logMessage('Name: ' + details.Name + ', Domain: ' + details.Domain + ', Description: "' + details.Description + '", Topic: "' + details.Topic + '"');
 			}, function() {
 			    logMessage('Failed to fetch chat room details...');
@@ -53,7 +53,7 @@
 
 		// gets and prints the local user's details
 		function GetLocalUserDetails() {
-		    window.AddInWrapper.getLocalUserDetails(function(details) {
+		    window.MindLinkAddInClient.getLocalUserDetails(function(details) {
 		        logMessage('Uri: ' + details.Uri + ', DisplayName: "' + details.DisplayName + '"');
 		    }, function() {
 		        logMessage('Failed to fetch local user details...');
@@ -62,7 +62,7 @@
 
 		// gets and prints the domain's details
 		function GetDomainDetails() {
-		    window.AddInWrapper.getDomainDetails(function(domainName) {
+		    window.MindLinkAddInClient.getDomainDetails(function(domainName) {
 		        logMessage('Domain Name: ' + domainName);
 		    }, function() {
 		        logMessage('Failed to fetch domain details...');
@@ -71,7 +71,7 @@
 
 		// gets and prints the maximum message length
 		function GetMaxMessageLength() {
-		    window.AddInWrapper.getMaxMessageLength(function(maxMessageLength) {
+		    window.MindLinkAddInClient.getMaxMessageLength(function(maxMessageLength) {
 		        logMessage('Max message length: ' + maxMessageLength);
 		    }, function() {
 		        logMessage('Failed to fetch maximum message length...');
@@ -82,12 +82,12 @@
 	<!-- Methods to handle incoming js method invocations from addin host -->
 	<script>
 		// handles received messages
-	    window.AddInWrapper.addMessageReceivedHandler(function(message, uri) {
+	    window.MindLinkAddInClient.addMessageReceivedHandler(function(message, uri) {
 			logMessage('RECEIVED: ' + message + ' ' + uri);
 		});
 
 		// handles messages about to be posted
-	    window.AddInWrapper.addBeforeMessageSendHandler(function(message) {
+	    window.MindLinkAddInClient.addBeforeMessageSendHandler(function(message) {
 			// if message contains the phrase "stop" stop the message being sent
 			if (message.indexOf('stop') >= 0) {
 				return true;
@@ -100,7 +100,7 @@
 		});
 
 		// handles notification of the closing and destruction of the addin
-	    window.AddInWrapper.addClosingHandler(function(closing) {
+	    window.MindLinkAddInClient.addClosingHandler(function(closing) {
 			alert('Closing');
 	    });
 	</script>
@@ -113,7 +113,7 @@
 			document.body.appendChild(document.createElement('br'));
 		};
 		
-		logMessage('Using proxy: ' + window.AddInWrapper);
+		logMessage('Using proxy: ' + window.MindLinkAddInClient);
 	</script>
  </body>
 </html>

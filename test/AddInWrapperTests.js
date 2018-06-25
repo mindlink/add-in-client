@@ -3,7 +3,7 @@
     var currentBeforeMessageSendHandler = null;
     var currentBeforeMessageSendScope = null;
 
-    window.AddInWrapper.addBeforeMessageSendHandler(function(message) {
+    window.MindLinkAddInClient.addBeforeMessageSendHandler(function(message) {
         if (currentBeforeMessageSendHandler) {
             return currentBeforeMessageSendHandler.call(currentBeforeMessageSendScope, message);
         }
@@ -36,11 +36,11 @@
     });
 
     it('initializing initializes correctly', function() {
-        expect(window.AddInWrapper).toBeDefined();
+        expect(window.MindLinkAddInClient).toBeDefined();
     });
 
     it('getting chat room gets chat room', function(done) {
-        window.AddInWrapper.getChatRoom(function(chatRoom) {
+        window.MindLinkAddInClient.getChatRoom(function(chatRoom) {
             expect(chatRoom.Domain).toBe(expectedDomain);
             expect(chatRoom.Name).toBe(expectedGroupName);
             expect(chatRoom.Description).toBe(expectedDescription);
@@ -51,7 +51,7 @@
     });
 
     it('getting local user details gets local user details', function(done) {
-        window.AddInWrapper.getLocalUserDetails(function(localUserDetails) {
+        window.MindLinkAddInClient.getLocalUserDetails(function(localUserDetails) {
             expect(localUserDetails.Uri.toLowerCase()).toBe(expectedLocalUserId);
             expect(localUserDetails.DisplayName).toBe(expectedDisplayName);
 
@@ -60,7 +60,7 @@
     });
 
     it('getting domain details gets domain details', function(done) {
-        window.AddInWrapper.getDomainDetails(function(domainName) {
+        window.MindLinkAddInClient.getDomainDetails(function(domainName) {
             expect(domainName).toBe(expectedDomain);
 
             done();
@@ -68,7 +68,7 @@
     });
 
     it('getting max message length gets max message length', function(done) {
-        window.AddInWrapper.getMaxMessageLength(function(maxMessageLength) {
+        window.MindLinkAddInClient.getMaxMessageLength(function(maxMessageLength) {
             expect(maxMessageLength).toBe(expectedMaxMessageLength);
 
             done();
@@ -76,22 +76,22 @@
     });
 
     it('sending message sends message', function(done) {
-        window.AddInWrapper.sendMessage('Message 1 - SHOULD BE SENT', false, function() {
+        window.MindLinkAddInClient.sendMessage('Message 1 - SHOULD BE SENT', false, function() {
             done();
         });
     });
 
     it('sending message as alert sends message', function(done) {
-        window.AddInWrapper.sendMessage('Message 2 - SHOULD BE SENT AS ALERT', true, function() {
+        window.MindLinkAddInClient.sendMessage('Message 2 - SHOULD BE SENT AS ALERT', true, function() {
             done();
         });
     });
 
     it('sending long message sends message as story', function(done) {
-        window.AddInWrapper.getMaxMessageLength((maxMessageLength) => {
+        window.MindLinkAddInClient.getMaxMessageLength((maxMessageLength) => {
             var message = 'This should come up as a story! First Half Of Message 3' + new Array(maxMessageLength - 'First Half Of Message 3'.length).join('x') + ' Second line of message 3';
 
-            window.AddInWrapper.sendMessage(message, false, () => {
+            window.MindLinkAddInClient.sendMessage(message, false, () => {
                 done();
             });
         });
@@ -108,7 +108,7 @@
             handlerInvocationCount = handlerInvocationCount + 1;
         }, scope);
         
-        window.AddInWrapper.sendMessage('Message 4 - SHOULD BE SENT', false, function() {
+        window.MindLinkAddInClient.sendMessage('Message 4 - SHOULD BE SENT', false, function() {
             expect(handlerInvocationCount).toBe(1);
             done();
         });
@@ -118,7 +118,7 @@
         attachBeforeMessageSendHandler(function() {
         }, this);
         
-        window.AddInWrapper.sendMessage('Message 5 - SHOULD BE SENT', false, function() {
+        window.MindLinkAddInClient.sendMessage('Message 5 - SHOULD BE SENT', false, function() {
             done();
         });
     });
@@ -128,7 +128,7 @@
             return true;
         }, this);
         
-        window.AddInWrapper.sendMessage('Message 5 - FAIL', false, function() {
+        window.MindLinkAddInClient.sendMessage('Message 5 - FAIL', false, function() {
             done();
         }, function() {
             expect().toFail('Cancelling message sending should not fail the message.');
@@ -140,7 +140,7 @@
             return false;
         }, this);
         
-        window.AddInWrapper.sendMessage('Mesasge 5 - SHOULD BE SENT', false, function() {
+        window.MindLinkAddInClient.sendMessage('Mesasge 5 - SHOULD BE SENT', false, function() {
             done();
         });
     });

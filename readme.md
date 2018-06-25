@@ -1,13 +1,31 @@
 
-# AddIn Wrapper
+# AddIn Client
 
-This project contains wrapping libraries for pchat addins.
+### What is this?
 
-## Tools
+This project contains a client library for interacting with the Lync/Skype for Business or MindLink Add-In API.
 
-To build this package you need the following tools installed:
+An Add-In is any web page that is configured to show "inside" a chat room in a Lync/Skype for Business Group Chat or Persistent Chat deployment.
+When exposed inside a chat room in a native Lync Group Chat / Skype for Business or MindLink client additional functionality is provided to the add-in through several JavaScript methods and callbacks.
 
-1. Yarn or NPM
+Over time the add-in API exposed by Lync changed location and when exposed through MindLink cross-domain you need to use a completely different method (post-message).
+
+To make it easier to develop across versions and clients MindLink developed an asynchronous wrapper - a single API surface that will automatically determine how to communicate with the native or MindLink APIs.
+
+### How to use?
+
+Yarn/npm install `@mindlink/add-in-client`. There's typescript type definitions you can read to know what's available.
+Alternatively you can download from github releases the latest version and include the library in a `script` tag.
+
+To use the source typescript, you should reference `@mindlink/add-in-client/src/client`.
+
+### Browser Support
+
+Any browser with native support for `JSON.stringify` and `JSON.parse`. For cross-domain, any browser with native post message support. 
+
+For compatibility with the native Lync/Skype for Business clients you need to support the version of Internet Explorer shipped with Windows. That likely means you will have to include a JSON shim - we purposefully haven't as you may be using one anyway in your project and we don't want to cause bloat.
+
+If you're not packaging your add-in up using a bundler we recommend including [JSON 3](https://github.com/bestiejs/json3) in a `script` tag before including the add-in client.
 
 ## Building
 
@@ -37,7 +55,3 @@ To test add-in functionality, you have to:
 3. As above.
 4. As above.
 5. Interact with the addin.
-
-## Source
-
-To use the source typescript, you should reference `"@mindlink/add-in-client/client"`

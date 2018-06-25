@@ -28,11 +28,5 @@
       "include": [
         "./**/*.ts",
         "./**/*.d.ts"
-      ],
-      "atom": {
-          "rewriteTsconfig": true
-      },
-      "awesomeTypescriptLoaderOptions": {
-        "forceIsolatedModules": true
-    }
+      ]
 }
