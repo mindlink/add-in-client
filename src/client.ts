@@ -1,6 +1,8 @@
 import { PostMessageAddInClient } from "./PostMessageAddInClient";
 import { DirectAddInClient } from "./DirectAddInClient";
 import { IAddInClient } from "./IAddInClient";
+import { IChatRoomMetaData } from "./IChatRoomMetaData";
+import { IUserMetaData } from "./IUserMetaData";
 
 /**
  * Creates the add-in client.
@@ -28,4 +30,7 @@ function createAddInClient(): IAddInClient {
 }
 
 const client = createAddInClient();
+
 export default client;
+
+export { IAddInClient, IChatRoomMetaData, IUserMetaData };
