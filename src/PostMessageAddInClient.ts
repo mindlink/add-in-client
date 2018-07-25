@@ -55,7 +55,7 @@ export class PostMessageAddInClient implements IAddInClient {
     constructor() {
         this.eventDispatcher = new MulticastDispatcher();
         window.addEventListener("message", (event) => {
-            this.onMessageReceived(event)
+            this.onMessageReceived(event);
         });
 
         // *** We"re ready to receive. ***
@@ -82,6 +82,15 @@ export class PostMessageAddInClient implements IAddInClient {
     }
 
     /**
+     * Asynchronously gets the chat room metadata for the add-in.
+     *
+     * @returns A promise which resolves to the chat room metadata.
+     */
+    public getChatRoomAsync(): Promise<IChatRoomMetaData> {
+        return new Promise((resolve, reject) => this.getChatRoom(resolve, reject));
+    }
+
+    /**
      * Asynchronously gets the local user details for the add-in.
      *
      * @param success The success callback.
@@ -90,6 +99,15 @@ export class PostMessageAddInClient implements IAddInClient {
      */
     public getLocalUserDetails(success: (user: IUserMetaData) => void, failure: FailureCallback, scope?: any): void {
         this.sendApiRequest("GetLocalUserDetails", success, failure, scope);
+    }
+
+    /**
+     * Asynchronously gets the local user details for the add-in.
+     *
+     * @returns A promise which resolves to the user metadata.
+     */
+    public getLocalUserDetailsAsync(): Promise<IUserMetaData> {
+        return new Promise((resolve, reject) => this.getLocalUserDetails(resolve, reject));
     }
 
     /**
@@ -104,6 +122,15 @@ export class PostMessageAddInClient implements IAddInClient {
     }
 
     /**
+     * Asynchronously gets the domain details for the add-in.
+     *
+     * @returns A promise which resolves to the domain details string.
+     */
+    public getDomainDetailsAsync(): Promise<string> {
+        return new Promise((resolve, reject) => this.getDomainDetails(resolve, reject));
+    }
+
+    /**
      * Asynchronously gets the maximum message length for the add-in.
      *
      * @param success The success callback.
@@ -112,6 +139,15 @@ export class PostMessageAddInClient implements IAddInClient {
      */
     public getMaxMessageLength(success: (maxMessageLength: number) => void, failure: FailureCallback, scope?: any): void {
         this.sendApiRequest("GetMaxMessageLength", success, failure, scope);
+    }
+
+    /**
+     * Asynchronously gets the maximum message length for the add-in.
+     *
+     * @returns A promise which resolves to the max message length.
+     */
+    public getMaxMessageLengthAsync(): Promise<number> {
+        return new Promise((resolve, reject) => this.getMaxMessageLength(resolve, reject));
     }
 
     /**
@@ -125,6 +161,17 @@ export class PostMessageAddInClient implements IAddInClient {
      */
     public sendMessage(message: string, alert: boolean, success: (isSent: boolean) => void, failure: FailureCallback, scope?: any): void {
         this.sendApiRequest("SendMessage", success, failure, scope, { message: message, alert: alert });
+    }
+
+    /**
+     * Asynchronously sends a message to the chat room for the add-in.
+     *
+     * @param message The message to send.
+     * @param alert Whether the message is an alert.
+     * @returns A promise which resolves to whether or not the message has been sent successfully.
+     */
+    public sendMessageAsync(message: string, alert: boolean): Promise<boolean> {
+        return new Promise((resolve, reject) => this.sendMessage(message, alert, resolve, reject));
     }
 
     /**
@@ -160,7 +207,7 @@ export class PostMessageAddInClient implements IAddInClient {
 
     /**
      * Returns a string representation of this instance.
-     * 
+     *
      * @returns A [string] representing this instance.
      */
     public toString(): string {
@@ -215,7 +262,7 @@ export class PostMessageAddInClient implements IAddInClient {
         this.callbacks[callbackId] = callback;
 
         return callbackId;
-    };
+    }
 
     /**
      * Gets a value indicating whether the given message is a response to an RPC request.
@@ -254,7 +301,7 @@ export class PostMessageAddInClient implements IAddInClient {
      */
     private onMessageReceived(event: any): void {
         const message = JSON.parse(event.data);
-        
+
         if (message) {
             if (this.isApiEvent(message)) {
                 this.dispatchApiEvent(message);
