@@ -50,8 +50,28 @@
         });
     });
 
+    it('getting chat room asynchronously gets chat room', function(done) {
+        window.MindLinkAddInClient.getChatRoomAsync().then((chatRoom) => {
+            expect(chatRoom.Domain).toBe(expectedDomain);
+            expect(chatRoom.Name).toBe(expectedGroupName);
+            expect(chatRoom.Description).toBe(expectedDescription);
+            expect(chatRoom.Topic).toBe(expectedTopic);
+
+            done();
+        });
+    });
+
     it('getting local user details gets local user details', function(done) {
         window.MindLinkAddInClient.getLocalUserDetails(function(localUserDetails) {
+            expect(localUserDetails.Uri.toLowerCase()).toBe(expectedLocalUserId);
+            expect(localUserDetails.DisplayName).toBe(expectedDisplayName);
+
+            done();
+        });
+    });
+
+    it('getting local user details asynchronously gets local user details', function(done) {
+        window.MindLinkAddInClient.getLocalUserDetailsAsync().then((localUserDetails) => {
             expect(localUserDetails.Uri.toLowerCase()).toBe(expectedLocalUserId);
             expect(localUserDetails.DisplayName).toBe(expectedDisplayName);
 
@@ -67,6 +87,14 @@
         });
     });
 
+    it('getting domain details asynchronously gets domain details', function(done) {
+        window.MindLinkAddInClient.getDomainDetailsAsync().then((domainName) => {
+            expect(domainName).toBe(expectedDomain);
+
+            done();
+        });
+    });
+
     it('getting max message length gets max message length', function(done) {
         window.MindLinkAddInClient.getMaxMessageLength(function(maxMessageLength) {
             expect(maxMessageLength).toBe(expectedMaxMessageLength);
@@ -75,8 +103,22 @@
         });
     });
 
+    it('getting max message length asynchronously gets max message length', function(done) {
+        window.MindLinkAddInClient.getMaxMessageLengthAsync().then((maxMessageLength) => {
+            expect(maxMessageLength).toBe(expectedMaxMessageLength);
+
+            done();
+        });
+    });
+
     it('sending message sends message', function(done) {
         window.MindLinkAddInClient.sendMessage('Message 1 - SHOULD BE SENT', false, function() {
+            done();
+        });
+    });
+
+    it('sending message asynchronously sends message', function(done) {
+        window.MindLinkAddInClient.sendMessageAsync('Message Async 1 - SHOULD BE SENT', false).then(() => {
             done();
         });
     });
@@ -140,7 +182,7 @@
             return false;
         }, this);
         
-        window.MindLinkAddInClient.sendMessage('Mesasge 5 - SHOULD BE SENT', false, function() {
+        window.MindLinkAddInClient.sendMessage('Message 5 - SHOULD BE SENT', false, function() {
             done();
         });
     });

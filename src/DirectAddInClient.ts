@@ -48,7 +48,7 @@ class ActiveXWrapper implements IDirectWindowApi {
 
     /**
      * Gets the chat room details for the add-in.
-     * 
+     *
      * @returns The chat room metadata.
      */
     public GetChatRoom(): IChatRoomMetaData {
@@ -57,7 +57,7 @@ class ActiveXWrapper implements IDirectWindowApi {
 
     /**
      * Gets the domain of the add-in.
-     * 
+     *
      * @returns The domain of the chat room.
      */
     public GetDomain(): string {
@@ -66,7 +66,7 @@ class ActiveXWrapper implements IDirectWindowApi {
 
     /**
      * Gets the maximum length of messages that can be sent in the chat room.
-     * 
+     *
      * @returns The maximum length of messages that can be sent in the chat room.
      */
     public GetMaxMessageLength(): number {
@@ -119,7 +119,7 @@ export class DirectAddInClient implements IAddInClient {
      * Initializes a new instance of this class.
      */
     constructor() {
-        this.dispatcher = new MulticastDispatcher()
+        this.dispatcher = new MulticastDispatcher();
         this.registerApiHandlers();
     }
 
@@ -135,6 +135,15 @@ export class DirectAddInClient implements IAddInClient {
     }
 
     /**
+     * Asynchronously gets the chat room metadata for the add-in.
+     *
+     * @returns A promise which resolves to the chat room metadata.
+     */
+    public getChatRoomAsync(): Promise<IChatRoomMetaData> {
+        return new Promise((resolve, reject) => this.getChatRoom(resolve, reject));
+    }
+
+    /**
      * Asynchronously gets the local user details for the add-in.
      *
      * @param success The success callback.
@@ -143,6 +152,15 @@ export class DirectAddInClient implements IAddInClient {
      */
     public getLocalUserDetails(success: (user: IUserMetaData) => void, failure: FailureCallback, scope?: any): void {
         this.callApiMethod("GetSelfUser", success, failure, scope);
+    }
+
+    /**
+     * Asynchronously gets the local user details for the add-in.
+     *
+     * @returns A promise which resolves to the user metadata.
+     */
+    public getLocalUserDetailsAsync(): Promise<IUserMetaData> {
+        return new Promise((resolve, reject) => this.getLocalUserDetails(resolve, reject));
     }
 
     /**
@@ -157,6 +175,15 @@ export class DirectAddInClient implements IAddInClient {
     }
 
     /**
+     * Asynchronously gets the domain details for the add-in.
+     *
+     * @returns A promise which resolves to the domain details string.
+     */
+    public getDomainDetailsAsync(): Promise<string> {
+        return new Promise((resolve, reject) => this.getDomainDetails(resolve, reject));
+    }
+
+    /**
      * Asynchronously gets the maximum message length for the add-in.
      *
      * @param success The success callback.
@@ -165,6 +192,15 @@ export class DirectAddInClient implements IAddInClient {
      */
     public getMaxMessageLength(success: (maxMessageLength: number) => void, failure: FailureCallback, scope?: any): void {
         this.callApiMethod("GetMaxMessageLength", success, failure, scope);
+    }
+
+    /**
+     * Asynchronously gets the maximum message length for the add-in.
+     *
+     * @returns A promise which resolves to the max message length.
+     */
+    public getMaxMessageLengthAsync(): Promise<number> {
+        return new Promise((resolve, reject) => this.getMaxMessageLength(resolve, reject));
     }
 
     /**
@@ -178,6 +214,17 @@ export class DirectAddInClient implements IAddInClient {
      */
     public sendMessage(message: string, alert: boolean, success: (isSent: boolean) => void, failure: FailureCallback, scope?: any): void {
         this.callApiMethod("PostMessage", success, failure, scope, [message, alert]);
+    }
+
+    /**
+     * Asynchronously sends a message to the chat room for the add-in.
+     *
+     * @param message The message to send.
+     * @param alert Whether the message is an alert.
+     * @returns A promise which resolves to whether or not the message has been sent successfully.
+     */
+    public sendMessageAsync(message: string, alert: boolean): Promise<boolean> {
+        return new Promise((resolve, reject) => this.sendMessage(message, alert, resolve, reject));
     }
 
     /**

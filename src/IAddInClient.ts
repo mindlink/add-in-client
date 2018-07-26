@@ -41,6 +41,13 @@ export interface IAddInClient {
     getChatRoom(success: (chatRoom: IChatRoomMetaData) => void, failure: FailureCallback, scope?: any): void;
 
     /**
+     * Asynchronously gets the chat room for the add-in.
+     *
+     * @returns A promise which resolves to the chat room metadata.
+     */
+    getChatRoomAsync(): Promise<IChatRoomMetaData>;
+
+    /**
      * Asynchronously gets the local user details for the add-in.
      *
      * @param success The success callback.
@@ -48,6 +55,13 @@ export interface IAddInClient {
      * @param scope The callback scope.
      */
     getLocalUserDetails(success: (user: IUserMetaData) => void, failure: FailureCallback, scope?: any): void;
+
+    /**
+     * Asynchronously gets the local user details for the add-in.
+     *
+     * @returns A promise which resolves to the user metadata.
+     */
+    getLocalUserDetailsAsync(): Promise<IUserMetaData>;
 
     /**
      * Asynchronously gets the domain details for the add-in.
@@ -59,6 +73,13 @@ export interface IAddInClient {
     getDomainDetails(success: (domain: string) => void, failure: FailureCallback, scope?: any): void;
 
     /**
+     * Asynchronously gets the domain details for the add-in.
+     *
+     * @returns A promise which resolves to the domain details string.
+     */
+    getDomainDetailsAsync(): Promise<string>;
+
+    /**
      * Asynchronously gets the maximum message length for the add-in.
      *
      * @param success The success callback.
@@ -66,6 +87,13 @@ export interface IAddInClient {
      * @param scope The callback scope.
      */
     getMaxMessageLength(success: (maxMessageLength: number) => void, failure: FailureCallback, scope?: any): void;
+
+    /**
+     * Asynchronously gets the maximum message length for the add-in.
+     *
+     * @returns A promise which resolves to the max message length.
+     */
+    getMaxMessageLengthAsync(): Promise<number>;
 
     /**
      * Asynchronously sends a message to the chat room for the add-in.
@@ -77,6 +105,15 @@ export interface IAddInClient {
      * @param scope The callback scope.
      */
     sendMessage(message: string, alert: boolean, success: (hasMessageSent: boolean) => void, failure: FailureCallback, scope?: any): void;
+
+    /**
+     * Asynchronously sends a message to the chat room for the add-in.
+     *
+     * @param message The message to send.
+     * @param alert Whether the message is an alert.
+     * @returns A promise which resolves to whether or not the message has been sent successfully.
+     */
+    sendMessageAsync(message: string, alert: boolean): Promise<boolean>;
 
     /**
      * Adds a handler for receiving messages from the chat room.
