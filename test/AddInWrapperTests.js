@@ -71,7 +71,7 @@
     });
 
     it('getting local user details asynchronously gets local user details', function(done) {
-        window.MindLinkAddInClient.getLocalUserDetailsAsync.then((localUserDetails) => {
+        window.MindLinkAddInClient.getLocalUserDetailsAsync().then((localUserDetails) => {
             expect(localUserDetails.Uri.toLowerCase()).toBe(expectedLocalUserId);
             expect(localUserDetails.DisplayName).toBe(expectedDisplayName);
 
@@ -118,7 +118,7 @@
     });
 
     it('sending message asynchronously sends message', function(done) {
-        window.MindLinkAddInClient.sendMessageAsync('Message 1 - SHOULD BE SENT', false).then(() => {
+        window.MindLinkAddInClient.sendMessageAsync('Message Async 1 - SHOULD BE SENT', false).then(() => {
             done();
         });
     });
@@ -182,7 +182,7 @@
             return false;
         }, this);
         
-        window.MindLinkAddInClient.sendMessage('Mesasge 5 - SHOULD BE SENT', false, function() {
+        window.MindLinkAddInClient.sendMessage('Message 5 - SHOULD BE SENT', false, function() {
             done();
         });
     });
