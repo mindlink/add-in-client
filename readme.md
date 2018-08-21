@@ -29,7 +29,7 @@ If you're not packaging your add-in up using a bundler we recommend including [J
 
 ## Building
 
-To build the modern library, simply run "yarn build" in the root folder of the project after installing the dependencies locally (`yarn install`/`npm install`). The built artifacts will be in the .\dist\ folder.
+To build the modern library, simply run `yarn build` in the root folder of the project after installing the dependencies locally (`yarn install`/`npm install`). The built artifacts will be in the .\dist\ folder.
 
 ## Testing
 

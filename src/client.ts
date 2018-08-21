@@ -1,6 +1,6 @@
 import { PostMessageAddInClient } from "./PostMessageAddInClient";
 import { DirectAddInClient } from "./DirectAddInClient";
-import { IAddInClient } from "./IAddInClient";
+import { IAddInClient, BeforeMessageSendHandler, ClosingHandler, FailureCallback, MessageReceivedHandler } from "./IAddInClient";
 import { IChatRoomMetaData } from "./IChatRoomMetaData";
 import { IUserMetaData } from "./IUserMetaData";
 
@@ -33,4 +33,4 @@ const client = createAddInClient();
 
 export default client;
 
-export { IAddInClient, IChatRoomMetaData, IUserMetaData };
+export { IAddInClient, IChatRoomMetaData, IUserMetaData, BeforeMessageSendHandler, ClosingHandler, FailureCallback, MessageReceivedHandler };
